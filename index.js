@@ -17,13 +17,56 @@ let input
 
 window.addEventListener("load", async () => {
   input = document.getElementById("input")
+
+  const getLinkButton = document.getElementById('get-link');
+  const linkResultParent = document.getElementById('link-result-parent');
+  const linkResult = document.getElementById('link-result');
+  const linkAnchor = document.getElementById('link-anchor');
+  const searchForm = document.getElementById('search-form');
+
+  function showLink() {
+    if(input.value) {
+      linkResultParent.style.display='block';
+      linkResult.textContent = `${window.location.origin}/?search=${input.value}`;
+      linkAnchor.href = `${window.location.origin}/?search=${input.value}`;
+    }
+  }
+
+  function doSearch() {
+    window.location.href = `https://www.google.com/search?${
+      query.lucky ? "btnI&" : ""
+    }q=${query.search}`;
+  }
+
+  searchForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if(!query.search) {
+      showLink();
+    } else {
+      //
+    }
+  });
+
+  const button = document.getElementById("search");
+  getLinkButton.addEventListener('click', function(e) {
+    showLink();
+  });
+
   input.value = ""
 
   setBrightness(JSON.parse(localStorage.getItem("dark") ?? "false"))
 
   if (!query.search) return
 
-  await setMessage("Step 1", "Type in your question")
+  button.addEventListener('click', function() {
+    doSearch();
+  });
+  button.style.display='inline-block';
+  getLinkButton.style.display = 'none';
+
+  await setMessage("Step 1", "Go to google.com");
+  await new Promise(resolve => setTimeout(resolve, 2000))
+  await setMessage("Step 2", "Type in your question");
   const cursor = makeCursor()
   await move(cursor, input)
   input.focus()
@@ -31,10 +74,8 @@ window.addEventListener("load", async () => {
   await new Promise(resolve => setTimeout(resolve, 1000))
   input.blur()
 
-  await setMessage("Step 2", "Click on the search button")
-  const button = query.lucky
-    ? document.getElementById("lucky")
-    : document.getElementById("search")
+  await setMessage("Step 3", "Click on the search button")
+
   await move(cursor, button)
   button.focus()
   await new Promise(resolve => setTimeout(resolve, 1000))
@@ -42,9 +83,7 @@ window.addEventListener("load", async () => {
   await setMessage("Come on", "Was it really that hard?", "alert-success")
   await new Promise(resolve => setTimeout(resolve, 3000))
 
-  window.location.href = `https://www.google.com/search?${
-    query.lucky ? "btnI&" : ""
-  }q=${query.search}`
+
 })
 
 function makeCursor() {
@@ -158,3 +197,4 @@ function setBrightness(dark) {
     }
   }
 }
+

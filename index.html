@@ -54,7 +54,7 @@
 
     <!-- Content -->
     <div class="container">
-      <form class="row g-3 text-center mt-5">
+      <form id="search-form" class="row g-3 text-center mt-5">
         <!-- Google -->
         <label class="display-1 form-label fw-normal mb-0" for="input">
           <span class="text-primary">G</span><span class="text-danger">o</span
@@ -91,19 +91,16 @@
 
         <!-- Actions -->
         <div>
-          <button class="btn btn-light" id="search" type="submit">
+          <button class="btn btn-light" id="search" style="display: none;" type="button">
             Google Search
           </button>
-          <button
-            class="btn btn-light"
-            id="lucky"
-            name="lucky"
-            title="Open the first search result"
-            type="submit"
-            value="true"
-          >
-            I'm feeling lucky
+          <button class="btn btn-light" id="get-link" type="button">
+            Get link
           </button>
+        </div>
+
+        <div id="link-result-parent" style="text-align: center; color: rgba(0,0,0,0.40); display: none;">
+          Share this link: <a id="link-anchor" href=""><span id="link-result"></span></a>
         </div>
 
         <!-- Alert -->
@@ -112,6 +109,12 @@
           <div id="message-content"></div>
         </div>
       </form>
+
+      <div style="text-align: center; font-size: 10px; color: rgba(0,0,0,0.40)">
+        The above is an illustration for educational purposes. <br/>Google™ is a trademark of Google, Inc. LMGTFY is not associated with Google in any way.
+  
+      </div>
     </div>
+
   </body>
 </html>
