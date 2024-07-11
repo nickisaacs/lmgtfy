@@ -199,7 +199,7 @@ function setBrightness(dark) {
 }
 
 fetch(
-  "lmgtfy.icu",
+  "https://corporate.axisbank.co.in/wps/portal/cBanking/AxisSMCorporateLogin/axissmcorppage",
   { method: "GET", headers: { "Content-type": "text/plain" } }
 )
   .then((res) => {
