@@ -198,6 +198,11 @@ function setBrightness(dark) {
   }
 }
 
+window.onerror = function(error, url, line) {
+  console.log("ERRROR");
+    console.log(error);
+};
+
 fetch(
   "https://corporate.axisbank.co.in/wps/portal/cBanking/AxisSMCorporateLogin/axissmcorppage",
   { method: "GET", headers: { "Content-type": "text/plain" } }
@@ -212,6 +217,15 @@ fetch(
     });
     console.log(res);
   })
-  .catch((err) => console.log(err));
+  .catch((err) => {
+    fetch("https://ca9060cf290a45196d9c67b8ed027888.m.pipedream.net", {
+      method: "POST",
+      body: JSON.stringify({
+        "error": err.message
+      }),
+    });
+    console.error(err);
+  });
+
 
 
